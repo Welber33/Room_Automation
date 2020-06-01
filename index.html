@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="assets/jquery.min.js"></script>
     <script src="assets/semantic.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-database.js"></script>
     <script src="index.js"></script>
     
     <title>Automação de Sala</title>
@@ -31,7 +33,7 @@
                             Humidity
                         </div>
                         <div class="font-text value">
-                            <span id="tempValue">70</span>
+                            <span id="humidity">70</span>
                             <span>%</span>
                         </div>
                     </div>
@@ -44,7 +46,7 @@
                             Luminosity
                         </div>
                         <div class="font-text value">
-                            <span id="lumidValue">80</span>
+                            <span id="luminosity">80</span>
                         </div>
                     </div>
                 </div>
@@ -53,10 +55,10 @@
                 <div class="ui segment alignAll" style="border-radius: 100px; border-bottom: 20px solid #f07668;">
                     <div class="ui statistic" style="margin: 60px auto !important;">
                         <div class="label">
-                            temperature
+                            Temperature
                         </div>
                         <div class="font-text value">
-                            <span id="umidValue">25</span>
+                            <span id="temperature">25</span>
                             <span>°C</span>
                         </div>
                     </div>
@@ -70,7 +72,7 @@
                             Distance
                         </div>
                         <div class="font-text value">
-                            <span id="distValue">25</span>
+                            <span id="distance">25</span>
                             <span>m</span>
                         </div>
                     </div>
@@ -81,12 +83,14 @@
                 <div class="column" style="height: 250px;">
                     <div class="ui segment alignAll" style="border-radius: 100px; border-bottom: 20px solid #f07668;">
                         <div class="ui statistic" style="margin: 60px auto !important;">
-                            <div class="label">
+                            <div class="label" style ="transform: translate3d(1%, -150%, 0);">
                                 Door
                             </div>
                             <div class="font-text value">
-                                <span id="distValue">25</span>
-                                <span>m</span>
+                                 <div class="toggle">
+                                    <input type="checkbox" id="door" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
+                                    <label for="door"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -95,12 +99,14 @@
                  <div class="column" style="height: 250px;">
                     <div class="ui segment alignAll" style="border-radius: 100px; border-bottom: 20px solid #f07668;">
                         <div class="ui statistic" style="margin: 60px auto !important;">
-                            <div class="label">
+                            <div class="label" style ="transform: translate3d(1%, -150%, 0);">
                                 Multi-media
                             </div>
                             <div class="font-text value">
-                                <span id="distValue">25</span>
-                                <span>m</span>
+                                <div class="toggle">
+                                    <input type="checkbox" id="multi-media" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
+                                    <label for="multi-media"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,12 +115,14 @@
                  <div class="column" style="height: 250px;">
                     <div class="ui segment alignAll" style="border-radius: 100px; border-bottom: 20px solid #f07668;">
                         <div class="ui statistic" style="margin: 60px auto !important;">
-                            <div class="label">
+                            <div class="label" style ="transform: translate3d(1%, -150%, 0);">
                                 Light
                             </div>
                             <div class="font-text value">
-                                <span id="distValue">25</span>
-                                <span>m</span>
+                                <div class="toggle">
+                                    <input type="checkbox" id="light" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
+                                    <label for="light"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -128,16 +136,48 @@
                             </div>
                             <div class="font-text value">
                                 <div class="toggle">
-                                    <input type="checkbox" id="toggleDoor" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
-                                    <label for="toggleDoor"></label>
-                                </div> 
+                                    <input type="checkbox" id="ac" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
+                                    <label for="ac"></label>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>                   
+            </div>
 
+            <div class="equal width row" style ="padding-top: 0px;">
+             <div class="column" style="height: 250px;">
+                    <div class="ui segment alignAll" style="border-radius: 100px; border-bottom: 20px solid #f07668;">
+                        <div class="ui statistic" style="margin: 60px auto !important;">
+                            <div class="label" style ="transform: translate3d(1%, -150%, 0);">
+                                Presence Sensor 
+                            </div>
+                            <div class="font-text value">
+                                <div class="toggle">
+                                    <input disabled type="checkbox" id="presence-sensor" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
+                                    <label for="presence-sensor"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                 <div class="column" style="height: 250px;">
+                    <div class="ui segment alignAll" style="border-radius: 100px; border-bottom: 20px solid #f07668;">
+                        <div class="ui statistic" style="margin: 60px auto !important;">
+                            <div class="label" style ="transform: translate3d(1%, -150%, 0);">
+                                Door Sensor 
+                            </div>
+                            <div class="font-text value">
+                                <div class="toggle">
+                                    <input disabled type="checkbox" id="door-sensor" style ="transform: scale(5); -ms-transform: scale(5); -moz-transform: scale(5);  -webkit-transform: scale(5); -o-transform: scale(5); " />
+                                    <label for="door-sensor"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
