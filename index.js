@@ -99,11 +99,39 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
-    $('#light').click(function(e) {
+    $('#light-click').click(function(e) {
+        e.preventDefault();
         if ($('#light').prop('checked')) {
             light.set(0).then().catch();
         } else {
             light.set(1).then().catch();
+        }
+    })
+
+    $('#ac-click').click(function(e) {
+        e.preventDefault();
+        if ($('#ac').prop('checked')) {
+            ac.set(0).then().catch();
+        } else {
+            ac.set(1).then().catch();
+        }
+    })
+
+    $('#multi-media-click').click(function(e) {
+        e.preventDefault();
+        if ($('#multi-media').prop('checked')) {
+            multi_media.set(0).then().catch();
+        } else {
+            multi_media.set(1).then().catch();
+        }
+    })
+
+    $('#door-click').click(function(e) {
+        e.preventDefault();
+        if ($('#door').prop('checked')) {
+            door.set(0).then().catch();
+        } else {
+            door.set(1).then().catch();
         }
     })
 });
