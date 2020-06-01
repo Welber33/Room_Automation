@@ -19,8 +19,8 @@ var temperature = db.ref('sala/temperatura');
 var light = db.ref('sala/set_luminosidade');
 var humidity = db.ref('sala/umidade');
 var distance = db.ref('sala/distancia');
-var door = db.ref('sala/porta-status');
-var ac = db.ref('sala/ar-condicionado');
+var door = db.ref('sala/set_porta');
+var ac = db.ref('sala/set_ar');
 var luminosity = db.ref('sala/luminosidade');
 var multi_media = db.ref('sala/set_multimidia');
 var door_sensor = db.ref('sala/porta');
@@ -28,19 +28,19 @@ var door_sensor = db.ref('sala/porta');
 
 $(document).ready(function() {
     temperature.on('value', function(snapshot) {
-        $("#temperature").val(+snapshot.val());
+        $("#temperature").html(+snapshot.val());
     });
 
     luminosity.on('value', function(snapshot) {
-        $("#luminosity").val(+snapshot.val());
+        $("#luminosity").html(+snapshot.val());
     });
 
     humidity.on('value', function(snapshot) {
-        $("#humidity").val(+snapshot.val());
+        $("#humidity").html(+snapshot.val());
     });
 
     distance.on('value', function(snapshot) {
-        $("#distance").val(+snapshot.val());
+        $("#distance").html(+snapshot.val());
     });
 
     door.on('value', function(snapshot) {
